@@ -1,0 +1,62 @@
+[
+    {
+        "model": "core.beneficiario",
+        "pk": 2,
+        "fields": {
+            "empleado": 1,
+            "nombre": "Antonio",
+            "apellidos": "Colin",
+            "fecha_nacimiento": "2001-01-01",
+            "porcentaje": 90,
+            "curp": "PECC010101HMNRL02",
+            "ssn": "18654912",
+            "numero_telefono": "2365478901",
+            "nacionalidad": "Mexicano"
+        }
+    },
+    {
+        "model": "core.beneficiario",
+        "pk": 3,
+        "fields": {
+            "empleado": 1,
+            "nombre": "Juan",
+            "apellidos": "Colin",
+            "fecha_nacimiento": "2001-01-01",
+            "porcentaje": 10,
+            "curp": "PECC010101HMNRL03",
+            "ssn": "18654913",
+            "numero_telefono": "2365478900",
+            "nacionalidad": "Mexicano"
+        }
+    },
+    {
+        "model": "core.beneficiario",
+        "pk": 5,
+        "fields": {
+            "empleado": 3,
+            "nombre": "Jose",
+            "apellidos": "Colin",
+            "fecha_nacimiento": "2001-01-01",
+            "porcentaje": 85,
+            "curp": "PECC010101HMNRL04",
+            "ssn": "154184",
+            "numero_telefono": "1236987452",
+            "nacionalidad": "Mexicano"
+        }
+    },
+    {
+        "model": "core.beneficiario",
+        "pk": 6,
+        "fields": {
+            "empleado": 3,
+            "nombre": "Jose",
+            "apellidos": "Perez",
+            "fecha_nacimiento": "2001-01-01",
+            "porcentaje": 15,
+            "curp": "PECC010101HMNRL05",
+            "ssn": "65841",
+            "numero_telefono": "1236987452",
+            "nacionalidad": "Mexicano"
+        }
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "model": "core.empleado",
+        "pk": 1,
+        "fields": {
+            "nombre": "Juan",
+            "apellidos": "PErez",
+            "fecha_nacimiento": "2000-01-01",
+            "numero_empleado": 1234567,
+            "curp": "PECJ990909HMNRLN00",
+            "ssn": "12345678",
+            "numero_telefono": "1234567890",
+            "nacionalidad": "Mexicana"
+        }
+    },
+    {
+        "model": "core.empleado",
+        "pk": 3,
+        "fields": {
+            "nombre": "Antonio",
+            "apellidos": "Perez",
+            "fecha_nacimiento": "2001-01-01",
+            "numero_empleado": 1234566,
+            "curp": "PECJ990909HMNRLN01",
+            "ssn": "654814",
+            "numero_telefono": "1236547890",
+            "nacionalidad": "Mexicana"
+        }
+    }
+]
