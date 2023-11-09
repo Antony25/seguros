@@ -84,11 +84,11 @@ class Beneficiaries:
                 print(query)
 
                 value= cursor.execute(query)
-                if value.rowcount>0:
+                if cursor.rowcount>0:
                     result.success = True
                     result.message = "Creacion Exitosa"
                 else:
-                    result.message = "Ocurrio un error al intentar agregar el beneficiario"
+                    result.message =  cursor.fetchval()
         except Exception as e:
             print(str(e))
             result.message =  str(e)

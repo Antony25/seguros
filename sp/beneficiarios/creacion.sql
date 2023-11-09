@@ -54,10 +54,13 @@ BEGIN
     END CATCH
        
     ELSE
-    BEGIN
-        PRINT  N'Los beneficiarios exceden el 100%'
-        RETURN RAISERROR (N'Los beneficiarios exceden el 100 porciento', 16, 1)
-    END
+    BEGIN 
+	    DECLARE @customError VARCHAR(50)
+	    set @customError= N'Los beneficiarios exceden el 100%'
+        SELECT  @customError
+
+        
+    END 
     
 END 
 
