@@ -46,10 +46,26 @@ class EmpleadoProcedureViewSet(APIView):
             return Response(employes, status=status.HTTP_200_OK)
         
     def post(self, request):
-        employe=  Employes(request.data)
-        result = employe.create()
+        serializer=EmpleadoSerializer(data=request.data)
+        if serializer.is_valid():
+            employe=  Employes(request.data)
+            result = employe.create()
+        else:
+            result = serializer.errors
         
         return Response(result, status=status.HTTP_201_CREATED if result.get('success') else status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self,request, pk=None, format=None):
+        result =  Employes.delete_employe(pk)
+        return Response(result, status=status.HTTP_204_NO_CONTENT if result.get('success') else status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request, pk=None, format=None):
+        employe=  Employes(request.data)
+        result = employe.update(pk)
+        
+        return Response(result, status=status.HTTP_200_OK if result.get('success') else status.HTTP_400_BAD_REQUEST)
+
         
 
 @permission_classes((permissions.AllowAny,))
@@ -64,8 +80,24 @@ class BeneficiarioProcedureViewSet(APIView):
             else:
                 beneficiaries =  Beneficiaries.get_all_beneficiaries()
             return Response(beneficiaries, status=status.HTTP_200_OK)
+        
     def post(self, request):
-        beneficiary=  Beneficiaries(request.data)
-        result = beneficiary.create()
+        serializer=BeneficiarioSerializer(data=request.data)
+        if serializer.is_valid():
+            beneficiary=  Beneficiaries(request.data)
+            result = beneficiary.create()
+        else:
+            result = serializer.errors
+
         
         return Response(result, status=status.HTTP_201_CREATED if result.get('success') else status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self,request, pk=None, format=None):
+        result =  Beneficiaries.delete_beneficiarie(pk)
+        return Response(result, status=status.HTTP_204_NO_CONTENT if result.get('success') else status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request, pk=None, format=None):
+        beneficiary=  Beneficiaries(request.data)
+        result = beneficiary.update(pk)
+        
+        return Response(result, status=status.HTTP_200_OK if result.get('success') else status.HTTP_400_BAD_REQUEST)

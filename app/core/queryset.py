@@ -21,7 +21,6 @@ class Employes:
         
         try:
             with connection.cursor() as cursor:
-                set_trace()
                 query = '''addEmploye @nombre="{nombre}", @apellidos="{apellidos}", \
                 @fecha_nacimiento="{fecha_nacimiento}", @numero_empleado={numero_empleado},\
                 @curp="{curp}", @ssn="{ssn}", @numero_telefono="{numero_telefono}", @nacionalidad="{nacionalidad}"'''.format(**self.data)
@@ -50,10 +49,10 @@ class Employes:
 
         print(result)
         return EmpleadoSerializer(result, many=True).data
+    
     @staticmethod
     def get_employe(id) -> dict:
         result = {}
-        set_trace()
         try:
             cursor.execute(f'getEmploye @id={id}')
             response = cursor.fetchone()
@@ -63,6 +62,47 @@ class Employes:
 
         print(result)
         return EmpleadoSerializer(result, many=False).data
+        
+    
+    @staticmethod
+    def delete_employe(id) -> dict:
+        result = ResultResponse()
+        try:
+            cursor.execute(f'deleteEmploye @id={id}')
+            
+            if cursor.rowcount>0:
+                result.success = True
+                result.message = "Proceso Exitoso"
+            else:
+                result.message = "Error al eliminar el empleado"
+            
+        except Exception as e:
+            print(str(e))
+            result.message = str(e)
+
+        return result.to_dict()
+    
+    def update(self, id ):
+        result = ResultResponse()
+        
+        try:
+            self.data.update({"id":id})
+            with connection.cursor() as cursor:
+                query = '''updateEmploye @id={id}, @nombre="{nombre}", @apellidos="{apellidos}", \
+                @fecha_nacimiento="{fecha_nacimiento}", @numero_empleado={numero_empleado},\
+                @curp="{curp}", @ssn="{ssn}", @numero_telefono="{numero_telefono}", @nacionalidad="{nacionalidad}"'''.format(**self.data)
+
+                value= cursor.execute(query)
+                if value.rowcount>0:
+                    result.success = True
+                    result.message = "Actualizacion Exitosa"
+                else:
+                    result.message =  "Error al realizar la actualizacion"
+        except Exception as e:
+            print(str(e))
+            result.message =  str(e)
+
+        return result.to_dict()
 
 
 class Beneficiaries:
@@ -71,19 +111,17 @@ class Beneficiaries:
         self.data = data
 
 
-    def create(self ):
+    def create(self )-> dict:
         result = ResultResponse()
         
         try:
             with connection.cursor() as cursor:
-                set_trace()
                 query = '''addBeneficiary @nombre="{nombre}", @apellidos="{apellidos}", \
                 @fecha_nacimiento="{fecha_nacimiento}", @porcentaje={porcentaje},\
                 @curp="{curp}", @ssn="{ssn}", @numero_telefono="{numero_telefono}", @nacionalidad="{nacionalidad}",
                 @empleado_id={empleado}'''.format(**self.data)
                 print(query)
 
-                value= cursor.execute(query)
                 if cursor.rowcount>0:
                     result.success = True
                     result.message = "Creacion Exitosa"
@@ -98,7 +136,6 @@ class Beneficiaries:
 
     @staticmethod
     def get_all_beneficiaries() -> list:
-        set_trace()
         result = []
         try:
             cursor.execute('getBeneficiaries')
@@ -110,10 +147,10 @@ class Beneficiaries:
 
         print(result)
         return BeneficiarioSerializer(result, many=True).data
+    
     @staticmethod
     def get_beneficiary(id) -> dict:
         result = {}
-        set_trace()
         try:
             cursor.execute(f'getBeneficiarie @id={id}')
             response = cursor.fetchone()
@@ -124,9 +161,9 @@ class Beneficiaries:
         print(result)
         return BeneficiarioSerializer(result, many=False).data
     
+    @staticmethod
     def get_beneficiaries_by_participant(id) -> list:
         result = []
-        set_trace()
         try:
             cursor.execute(f'getBeneficiariesByParticipant @id_empleado={id}')
             response = cursor.fetchall()
@@ -137,3 +174,50 @@ class Beneficiaries:
 
         print(result)
         return BeneficiarioSerializer(result, many=True).data
+    
+    @staticmethod
+    def delete_beneficiarie(id) -> dict:
+        result = ResultResponse()
+        try:
+            cursor.execute(f'deleteBeneficiary @id={id}')
+            
+            if cursor.rowcount>0:
+                result.success = True
+                result.message = "Proceso Exitoso"
+            else:
+                result.message = "Error al eliminar el empleado"
+            
+        except Exception as e:
+            print(str(e))
+            result.message = str(e)
+
+        return result.to_dict()
+
+    def update(self, id )-> dict:
+        result = ResultResponse()
+        
+        try:
+            self.data.update({"id":id})
+            with connection.cursor() as cursor:
+                query = '''updateBeneficiary @id={id}, @nombre="{nombre}", @apellidos="{apellidos}", \
+                @fecha_nacimiento="{fecha_nacimiento}", @porcentaje={porcentaje},\
+                @curp="{curp}", @ssn="{ssn}", @numero_telefono="{numero_telefono}", @nacionalidad="{nacionalidad}",\
+                @empleado_id={empleado}'''.format(**self.data)
+                print(query)
+                cursor.execute(query)
+
+                if cursor.rowcount>0:
+                    result.success = True
+                    result.message = "Actualizacion Exitosa"
+                else:
+                    try:
+                        result.message = cursor.fetchval()
+                    except:
+                        result.message =  "Error al realizar la actualizacion"
+                        
+        except Exception as e:
+            print(str(e))
+            result.message =  str(e)
+
+        return result.to_dict()
+
