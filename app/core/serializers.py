@@ -12,6 +12,8 @@ class EmpleadoSerializer(serializers.ModelSerializer):
         age = getAge(data.get('fecha_nacimiento'))
         if age <18:
             raise serializers.ValidationError({"fecha_nacimiento": "Es menor a 18 años"})
+        if len(data.get('numero_telefono'))<10:
+            raise serializers.ValidationError({"numero_telefono": "La longitud del numero de telefono debe ser de 10"})
         return data
 
     class Meta:
@@ -25,6 +27,8 @@ class BeneficiarioSerializer(serializers.ModelSerializer):
         age = getAge(data.get('fecha_nacimiento'))
         if age <18:
             raise serializers.ValidationError({"fecha_nacimiento": "Es menor a 18 años"})
+        if len(data.get('numero_telefono'))<10:
+            raise serializers.ValidationError({"numero_telefono": "La longitud del numero de telefono debe ser de 10"})
         return data
 
     class Meta:
