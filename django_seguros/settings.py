@@ -25,20 +25,15 @@ SECRET_KEY = 'django-insecure-dh4@j*-p0#4_@4zl$q*l80f619s35#7&u^$c4wxv_0ufkt5vre
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*',"127.0.0.1","localhost"]
+ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-    "https://example.com",
-    "https://sub.example.com",
-    "http://localhost:8080",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "http://localhost:3000",
-    "http://127.0.0.1:9000",
     "http://localhost:5173",
-    "http://192.168.0.120:4173",
 ]
 
 
@@ -53,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.core',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +89,7 @@ WSGI_APPLICATION = 'django_seguros.wsgi.application'
 DATABASES = {
     'default': { 
         'ENGINE': 'mssql',
-        'NAME': 'seguros_django ',
+        'NAME': 'new',
         'USER':'sa',
         'PASSWORD':'ChangeMe1$',
         'HOST':'127.0.0.1',
