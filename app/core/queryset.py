@@ -121,7 +121,7 @@ class Beneficiaries:
                 @curp="{curp}", @ssn="{ssn}", @numero_telefono="{numero_telefono}", @nacionalidad="{nacionalidad}",
                 @empleado_id={empleado}'''.format(**self.data)
                 print(query)
-
+                set_trace()
                 if cursor.rowcount>0:
                     result.success = True
                     result.message = "Creacion Exitosa"
