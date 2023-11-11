@@ -120,7 +120,7 @@ class Beneficiaries:
                 @fecha_nacimiento="{fecha_nacimiento}", @porcentaje={porcentaje},\
                 @curp="{curp}", @ssn="{ssn}", @numero_telefono="{numero_telefono}", @nacionalidad="{nacionalidad}",
                 @empleado_id={empleado}'''.format(**self.data)
-                print(query)
+                cursor.execute(query)
                 if cursor.rowcount>0:
                     result.success = True
                     result.message = "Creacion Exitosa"
@@ -179,7 +179,6 @@ class Beneficiaries:
         result = ResultResponse()
         try:
             cursor.execute(f'deleteBeneficiary @id={id}')
-            
             if cursor.rowcount>0:
                 result.success = True
                 result.message = "Proceso Exitoso"
